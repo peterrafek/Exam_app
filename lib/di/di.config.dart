@@ -13,10 +13,10 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../api/api_client.dart' as _i277;
+ import '../api/client/api_client.dart' as _i277;
+import '../api/client/api_module.dart' as _i960;
 import '../api/data_source_impl/sign_up_data_source_impl.dart' as _i539;
-import '../api/dio_servies.dart' as _i960;
-import '../data/data_source/sign_up_data_source.dart' as _i105;
+ import '../data/data_source/sign_up_data_source.dart' as _i105;
 import '../data/repos_impl/sign_up_repo_impl.dart' as _i775;
 import '../domain/repos/sign_up_repo.dart' as _i427;
 import '../domain/use_case/sign_up_use_case.dart' as _i695;
@@ -51,4 +51,4 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$RegisterModule extends _i960.RegisterModule {}
+class _$RegisterModule extends _i960.ApiModule {}

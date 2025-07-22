@@ -1,10 +1,10 @@
 import 'package:exam_app/core/colors_manager.dart';
 import 'package:exam_app/core/routes_manager.dart';
+import 'package:exam_app/core/strings_manager.dart';
 import 'package:exam_app/presentaion/features/auth/sign_up/sign_up_states.dart';
 import 'package:exam_app/presentaion/features/auth/sign_up/sign_up_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 import '../../../../api/model/request/sign_up_request.dart';
 import '../../../../core/app_style.dart';
@@ -40,9 +40,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>getIt.get<SignUpViewModel>(),
+      create: (BuildContext context) =>getIt<SignUpViewModel>(),
       child: Scaffold(
-       appBar: AppBar(leading: BackButton(), title: Text("Sign Up")),
+       appBar: AppBar(leading: BackButton(), title: Text(StringsManager.signUpWord)),
        body: BlocListener<SignUpViewModel,SignUpStates>(
 
          listener: (BuildContext context, state) {
@@ -64,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                Navigator.pop(context);
                ScaffoldMessenger.of(context).showSnackBar(
                  SnackBar(
-                   content: Text("SignUp Successfully",
+                   content: Text(StringsManager.signUpSuccessfullyTitle,
                        style: AppStyle.snackBarMessage),
                    backgroundColor: Colors.green,
                    duration: Duration(seconds: 2),
@@ -75,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                Navigator.pop(context);
                ScaffoldMessenger.of(context).showSnackBar(
                  SnackBar(
-                   content: Text("Error", style: AppStyle.snackBarMessage),
+                   content: Text(StringsManager.error, style: AppStyle.snackBarMessage),
                    backgroundColor: Colors.red,
                    duration: Duration(seconds: 2),
                  ),
@@ -97,13 +97,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                    TextFormField(
                      controller: userNameController,
                      decoration: InputDecoration(
-                       labelText: "user name",
-                       hintText: "Enter your user name ",
+                       labelText:StringsManager.userName,
+                       hintText: StringsManager.enterYourUserName,
                        border: OutlineInputBorder(),
                      ),
                      validator: (text) {
                        if (text == null || text.trim().isEmpty) {
-                         return "this user name is not valid";
+                         return StringsManager.thisUserNotValid;
                        }
 
                        return null;
@@ -116,13 +116,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                          child: TextFormField(
                            controller: firstNameController,
                            decoration: InputDecoration(
-                             labelText: "First name",
-                             hintText: "Enter First name ",
+                             labelText: StringsManager.firstName,
+                             hintText: StringsManager.enterFirstName,
                              border: OutlineInputBorder(),
                            ),
                            validator: (text) {
                              if (text == null || text.isEmpty) {
-                               return "please enter your first name";
+                               return StringsManager.pleaseEnterYourFirstName;
                              }
                            },
                          ),
@@ -132,13 +132,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                          child: TextFormField(
                            controller: lastNameController,
                            decoration: InputDecoration(
-                             labelText: "Last name",
-                             hintText: "Enter Last name ",
+                             labelText:StringsManager.lastName ,
+                             hintText: StringsManager.enterLastName,
                              border: OutlineInputBorder(),
                            ),
                            validator: (text) {
                              if (text == null || text.isEmpty) {
-                               return "please enter your last name";
+                               return StringsManager.pleaseEnterYourLastName;
                              }
                            },
                          ),
@@ -150,19 +150,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                    TextFormField(
                      controller: emailController,
                      decoration: InputDecoration(
-                       labelText: "Email",
-                       hintText: "Enter your email ",
+                       labelText:  StringsManager.email,
+                       hintText: StringsManager.enterYourEmail,
                        border: OutlineInputBorder(),
                      ),
                      validator: (text) {
                        if (text == null || text.trim().isEmpty) {
-                         return "this EMAIL is not valid";
+                         return StringsManager.thisEmailIsNitValid;
                        }
                        bool isEmailValid = RegExp(
-                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                         StringsManager.emailRegsExp,
                        ).hasMatch(text);
                        if (!isEmailValid) {
-                         return 'Email format is wrong';
+                         return StringsManager.emailFormatIsWrong;
                        }
                        return null;
                      },
@@ -175,16 +175,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                          child: TextFormField(
                            controller: passwordController,
                            decoration: InputDecoration(
-                             labelText: "password",
-                             hintText: "Enter password ",
+                             labelText: StringsManager.passwordWord,
+                             hintText: StringsManager.enterPassword,
                              border: OutlineInputBorder(),
                            ),
                            validator: (text) {
                              if (text == null || text.isEmpty) {
-                               return "please enter your password";
+                               return StringsManager.pleaseEnterYourPassword;
                              }
                              if (text.length < 6) {
-                               return 'Passwords should be more 6';
+                               return StringsManager.passwordShouldBeMore;
                              }
                            },
                          ),
@@ -195,16 +195,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                          child: TextFormField(
                            controller: confirmPasswordController,
                            decoration: InputDecoration(
-                             labelText: "confirm password",
-                             hintText: "Enter confirm password ",
+                             labelText:StringsManager.confirmPassword,
+                             hintText: StringsManager.enterConfirmPassword,
                              border: OutlineInputBorder(),
                            ),
                            validator: (text) {
                              if (text == null || text.isEmpty) {
-                               return 'Please enter a password';
+                               return  StringsManager.pleaseEnterAPassword;
                              }
                              if (text != passwordController.text) {
-                               return 'password not matched';
+                               return StringsManager.passwordNotMatched;
                              }
                            },
                          ),
@@ -215,17 +215,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                    TextFormField(
                      controller: phoneController,
                      decoration: InputDecoration(
-                       labelText: "Phone number",
-                       hintText: "Enter Phone number ",
+                       labelText: StringsManager.phoneNumber,
+                       hintText: StringsManager.enterPhoneNumber,
                        border: OutlineInputBorder(),
                      ),
                      validator: (text) {
                        if (text == null || text.isEmpty) {
-                         return 'Enter phone number';
+                         return  StringsManager.enterPhoneNumber;
                        }
 
                        if (text != phoneController.text) {
-                         return 'phone number not matched';
+                         return StringsManager.phoneNumberNotMatched;
                        }
 
                        }
@@ -247,7 +247,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                            phone: phoneController.text,
                          );
                          context.read<SignUpViewModel>().signUp(request);
-                        }
+                         Navigator.pushNamed(context, RoutesManager.logIn);
+                       }
+
+
                      },
                      child: Container(
                        width: double.infinity,
@@ -258,7 +261,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        ),
                        child: Center(
                          child: Text(
-                           "Sign up",
+                           StringsManager.signUpWord,
                            style: TextStyle(color: Colors.white),
                          ),
                        ),
@@ -268,12 +271,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                    Row(
                      children: [
-                        Center(child: Text("Already have an account? ")),
+                        Center(child: Text(StringsManager.alreadyHaveAnAccount)),
                        GestureDetector(
                          onTap: (){
                            Navigator.pushNamed(context,RoutesManager.logIn);
                          },
-                         child:Text('Login',style: TextStyle(color: ColorsManager.blueButton,decoration: TextDecoration.underline),  ),
+                         child:Text(StringsManager.logInWord
+                           ,style: TextStyle(color: ColorsManager.blueButton,decoration: TextDecoration.underline),  ),
                        )
                      ],
                    ),

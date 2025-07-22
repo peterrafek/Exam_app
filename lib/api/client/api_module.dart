@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
  import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../di/di.dart';
+import '../../di/di.dart';
+
 
 @module
-abstract class RegisterModule {
+abstract class ApiModule {
   @preResolve
   Future<Dio> provideDio() async {
     final Dio dio = Dio(
@@ -24,6 +26,11 @@ abstract class RegisterModule {
         requestBody: true,
         responseHeader: true,
         responseBody: true,
+        error: true,
+        compact: true,
+        maxWidth:90 ,
+        enabled: kDebugMode,
+
         logPrint: (object) {
           debugPrint(object.toString());
         },
@@ -34,7 +41,7 @@ abstract class RegisterModule {
   }
 }
 
-extension DioServiceExtension on RegisterModule {
+extension DioServiceExtension on ApiModule {
   static void updateDioWithToken(String token) {
     Dio dio = getIt.get<Dio>();
     BaseOptions newBaseOptions = BaseOptions(
