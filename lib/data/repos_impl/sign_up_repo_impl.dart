@@ -1,3 +1,4 @@
+import 'package:exam_app/api/client/api_result.dart';
 import 'package:exam_app/domain/repos/sign_up_repo.dart';
 import 'package:injectable/injectable.dart';
 
@@ -9,7 +10,7 @@ class SignUpRepoImpl extends SignUpRepo{
  SignUpDataSource _dataSource;
   SignUpRepoImpl(this._dataSource);
   @override
-  Future<SignUpResponse> signUp(SignUpRequest request) {
+  Future<Result<SignUpResponse>> signUp(SignUpRequest request) {
     return _dataSource.signUp(request);
    }
 

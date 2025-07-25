@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:exam_app/api/client/api_end_points.dart';
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,7 +15,7 @@ abstract class ApiModule {
     final Dio dio = Dio(
       BaseOptions(
         connectTimeout: const Duration(seconds: 30),
-        baseUrl: 'https://exam.elevateegy.com/api/',
+        baseUrl: ApiEndPoints.baseUrl,
         headers: {
           'Accept': 'application/json',
         },
@@ -46,7 +47,7 @@ extension DioServiceExtension on ApiModule {
     Dio dio = getIt.get<Dio>();
     BaseOptions newBaseOptions = BaseOptions(
       connectTimeout: const Duration(seconds: 30),
-      baseUrl: 'https://exam.elevateegy.com/api/',
+      baseUrl: ApiEndPoints.baseUrl,
       headers: {
         "token": token,
         'Accept': 'application/json',

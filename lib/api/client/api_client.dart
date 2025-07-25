@@ -10,7 +10,7 @@ import '../model/response/sign_up_response.dart';
 part 'api_client.g.dart';
 
 @injectable
-@RestApi(baseUrl:"https://exam.elevateegy.com/api")
+@RestApi(baseUrl: ApiEndPoints.baseUrl)
 abstract class ApiClient {
   @factoryMethod
   factory ApiClient(Dio dio) = _ApiClient;

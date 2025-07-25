@@ -40,10 +40,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>getIt<SignUpViewModel>(),
+      create: (BuildContext context) =>getIt.get<SignUpViewModel>(),
       child: Scaffold(
        appBar: AppBar(leading: BackButton(), title: Text(StringsManager.signUpWord)),
-       body: BlocListener<SignUpViewModel,SignUpStates>(
+       body: Builder(
+           builder:
+           (context){
+             final viewModel = context.read<SignUpViewModel>();
+                 return BlocListener<SignUpViewModel,SignUpStates>(
 
          listener: (BuildContext context, state) {
            switch(state){
@@ -75,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                Navigator.pop(context);
                ScaffoldMessenger.of(context).showSnackBar(
                  SnackBar(
-                   content: Text(StringsManager.error, style: AppStyle.snackBarMessage),
+                   content: Text(state.message ?? StringsManager.error, style: AppStyle.snackBarMessage),
                    backgroundColor: Colors.red,
                    duration: Duration(seconds: 2),
                  ),
@@ -94,6 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                key: _formKey,
                child: Column(
                  children: [
+
                    TextFormField(
                      controller: userNameController,
                      decoration: InputDecoration(
@@ -101,13 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        hintText: StringsManager.enterYourUserName,
                        border: OutlineInputBorder(),
                      ),
-                     validator: (text) {
-                       if (text == null || text.trim().isEmpty) {
-                         return StringsManager.thisUserNotValid;
-                       }
-
-                       return null;
-                     },
+                     validator:  viewModel.validateUserName,
                    ),
                    SizedBox(height: 25),
                    Row(
@@ -120,11 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                              hintText: StringsManager.enterFirstName,
                              border: OutlineInputBorder(),
                            ),
-                           validator: (text) {
-                             if (text == null || text.isEmpty) {
-                               return StringsManager.pleaseEnterYourFirstName;
-                             }
-                           },
+                           validator:  viewModel.validateFirstName,
                          ),
                        ),
                        SizedBox(width: 20),
@@ -136,11 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                              hintText: StringsManager.enterLastName,
                              border: OutlineInputBorder(),
                            ),
-                           validator: (text) {
-                             if (text == null || text.isEmpty) {
-                               return StringsManager.pleaseEnterYourLastName;
-                             }
-                           },
+                           validator:  viewModel.validateLastName,
                          ),
                        ),
                      ],
@@ -154,18 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        hintText: StringsManager.enterYourEmail,
                        border: OutlineInputBorder(),
                      ),
-                     validator: (text) {
-                       if (text == null || text.trim().isEmpty) {
-                         return StringsManager.thisEmailIsNitValid;
-                       }
-                       bool isEmailValid = RegExp(
-                         StringsManager.emailRegsExp,
-                       ).hasMatch(text);
-                       if (!isEmailValid) {
-                         return StringsManager.emailFormatIsWrong;
-                       }
-                       return null;
-                     },
+                     validator:  viewModel.validateEmail,
                    ),
                    SizedBox(height: 25),
 
@@ -179,14 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                              hintText: StringsManager.enterPassword,
                              border: OutlineInputBorder(),
                            ),
-                           validator: (text) {
-                             if (text == null || text.isEmpty) {
-                               return StringsManager.pleaseEnterYourPassword;
-                             }
-                             if (text.length < 6) {
-                               return StringsManager.passwordShouldBeMore;
-                             }
-                           },
+                           validator: viewModel.validatePassword,
                          ),
                        ),
                        SizedBox(width: 20),
@@ -199,14 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                              hintText: StringsManager.enterConfirmPassword,
                              border: OutlineInputBorder(),
                            ),
-                           validator: (text) {
-                             if (text == null || text.isEmpty) {
-                               return  StringsManager.pleaseEnterAPassword;
-                             }
-                             if (text != passwordController.text) {
-                               return StringsManager.passwordNotMatched;
-                             }
-                           },
+                           validator:(value) => viewModel.validateConfirmPassword(value, passwordController.text),
                          ),
                        ),
                      ],
@@ -219,16 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        hintText: StringsManager.enterPhoneNumber,
                        border: OutlineInputBorder(),
                      ),
-                     validator: (text) {
-                       if (text == null || text.isEmpty) {
-                         return  StringsManager.enterPhoneNumber;
-                       }
-
-                       if (text != phoneController.text) {
-                         return StringsManager.phoneNumberNotMatched;
-                       }
-
-                       }
+                     validator:  viewModel.validatePhone,
 
                    ),
 
@@ -247,8 +204,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                            phone: phoneController.text,
                          );
                          context.read<SignUpViewModel>().signUp(request);
-                         Navigator.pushNamed(context, RoutesManager.logIn);
-                       }
+                        }
 
 
                      },
@@ -286,7 +242,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
              ),
            ),
          ),
-       ),
+       );
+          })
             ),
     );
   }

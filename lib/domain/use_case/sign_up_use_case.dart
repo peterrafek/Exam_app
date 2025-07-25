@@ -1,3 +1,4 @@
+import 'package:exam_app/api/client/api_result.dart';
 import 'package:exam_app/domain/repos/sign_up_repo.dart';
 import 'package:injectable/injectable.dart';
 
@@ -8,7 +9,7 @@ class SignUpUseCase{
    final SignUpRepo repo;
    SignUpUseCase(this.repo);
 
-   Future<SignUpResponse> call(SignUpRequest request) {
-     return repo.signUp(request);
+   Future<Result<SignUpResponse>> call(SignUpRequest request) {
+     return  repo.signUp(request);
    }
 }
