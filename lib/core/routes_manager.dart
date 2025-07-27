@@ -1,14 +1,8 @@
-import 'package:exam_app/core/di.dart';
-import 'package:exam_app/presentation/view/auth/email_verification/email_verification.dart';
-import 'package:exam_app/presentation/view/auth/forget_password/forget_password.dart';
-import 'package:exam_app/presentation/viewmodel/cubits/forget_password_cubit.dart';
-import 'package:exam_app/presentation/viewmodel/cubits/reset_password_cubit.dart';
-import 'package:exam_app/presentation/viewmodel/cubits/verification_cubit.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../presentation/view/auth/login/log_in.dart';
-import '../presentation/view/auth/reset_password/reset_password.dart';
+
 
 class RoutesManager {
   static const String logIn = '/logIn';
@@ -21,31 +15,6 @@ class RoutesManager {
       case logIn:
         return MaterialPageRoute(
           builder: (context) => const LogIn(),
-        );
-      case forgetPassword:
-        return MaterialPageRoute(
-          builder: (context) => const ForgetPassword(),
-        );
-      case emailVerification:
-        final args = settings.arguments as String;
-        return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => getIt<ForgetPasswordCubit>(),
-              ),
-              BlocProvider(create: (context) => getIt<VerificationCubit>()),
-            ],
-            child: EmailVerification(email: args),
-          ),
-        );
-      case resetPassword:
-        final args = settings.arguments as String;
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<ResetPasswordCubit>(),
-            child: ResetPassword(email: args),
-          ),
         );
     }
   }
