@@ -12,11 +12,11 @@ import '../states/login_state.dart';
 
 @injectable
 class LogInCubit extends Cubit<LoginState> {
-  GetLogInUsecase getLogInUsecase;
+  GetLogInUsecase _getLogInUsecase;
 
   // StoreLoginLocalUseCase storeLoginLocalUseCase;
 
-  LogInCubit(this.getLogInUsecase) : super(LoginStateInitialState());
+  LogInCubit(this._getLogInUsecase) : super(LoginStateInitialState());
 
   void doIntent(LogInIntent intent) {
     switch (intent) {
@@ -35,7 +35,7 @@ class LogInCubit extends Cubit<LoginState> {
 
   void _login(LoginRequestEntity request) async {
     emit(LoginStateLoadingState());
-    var res = await getLogInUsecase.execute(request);
+    var res = await _getLogInUsecase.execute(request);
     switch (res) {
       case Success<LoginResponseEntity>():
         // _cashUserInfo(res.data);

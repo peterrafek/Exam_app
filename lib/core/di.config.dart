@@ -19,6 +19,8 @@ import '../data/api/data_source_contract/login/log_in_data_source.dart'
     as _i1034;
 import '../data/api/data_source_contract/login/log_in_local_data_source.dart'
     as _i322;
+import '../data/api/data_source_impl/login/log_in_data_source_impl.dart'
+    as _i897;
 import '../data/api/data_source_impl/login/login_local_data_source_impl.dart'
     as _i765;
 import '../data/api/dio_servies.dart' as _i968;
@@ -61,10 +63,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i113.UserProvider>(() => _i113.UserProvider());
     gh.factory<_i217.ApiClient>(() => _i217.ApiClient(gh<_i361.Dio>()));
-    gh.factory<_i424.LogInRepository>(
-        () => _i88.LogInRepositoryImpl(gh<_i1034.LogInDataSource>()));
     gh.singleton<_i383.SecureStorageService<dynamic>>(
         () => _i651.SecureStorageServiceImp(gh<_i558.FlutterSecureStorage>()));
+    gh.factory<_i1034.LogInRemoteDataSource>(
+        () => _i897.LogInDataSourceImpl(apiClient: gh<_i217.ApiClient>()));
+    gh.factory<_i424.LogInRepository>(
+        () => _i88.LogInRepositoryImpl(gh<_i1034.LogInRemoteDataSource>()));
     gh.factory<_i322.StoreLogInLocalDataSource>(() =>
         _i765.StoreLoginLocalDataSourceImpl(
             gh<_i383.SecureStorageService<dynamic>>()));

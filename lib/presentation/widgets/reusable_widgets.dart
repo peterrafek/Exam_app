@@ -1,8 +1,10 @@
+import 'package:exam_app/core/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/app_style.dart';
 import '../../core/colors_manager.dart';
+import '../../core/validitaion.dart';
 
 void showAppSnackBar(BuildContext context, String message, Color color) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -20,12 +22,11 @@ void showAppSnackBar(BuildContext context, String message, Color color) {
 void showLoadingDialog(BuildContext context, {Color color = Colors.white}) {
   showDialog(
     context: context,
-    builder: (context) =>
-        AlertDialog(
-          title: Center(
-            child: CircularProgressIndicator(color: color),
-          ),
-        ),
+    builder: (context) => AlertDialog(
+      title: Center(
+        child: CircularProgressIndicator(color: color),
+      ),
+    ),
   );
 }
 
@@ -61,10 +62,11 @@ class UnderButtonRow extends StatelessWidget {
   final String behindUnderLineText;
   final String underLineText;
 
-  const UnderButtonRow({this.onTapClick,
-    super.key,
-    required this.behindUnderLineText,
-    required this.underLineText});
+  const UnderButtonRow(
+      {this.onTapClick,
+      super.key,
+      required this.behindUnderLineText,
+      required this.underLineText});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class UnderButtonRow extends StatelessWidget {
         Text(
           behindUnderLineText,
           style:
-          AppStyle.underButtonTitle.copyWith(fontWeight: FontWeight.w500),
+              AppStyle.underButtonTitle.copyWith(fontWeight: FontWeight.w500),
         ),
         SizedBox(width: 4.w),
         InkWell(
@@ -92,6 +94,11 @@ class UnderButtonRow extends StatelessWidget {
 class EmailTextField extends StatelessWidget {
   final TextEditingController controller;
 
+  @override
+  void dispose() {
+    controller.dispose();
+  }
+
   const EmailTextField({super.key, required this.controller});
 
   @override
@@ -100,25 +107,11 @@ class EmailTextField extends StatelessWidget {
       cursorColor: Colors.black,
       controller: controller,
       decoration: InputDecoration(
-        labelText: 'Email',
-        hintText: 'Enter Your Email',
+        labelText: StringsManager.emailWord,
+        hintText: StringsManager.emailHintText,
       ),
       keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your email';
-        }
-
-        final emailRegex = RegExp(
-          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-        );
-
-        if (!emailRegex.hasMatch(value)) {
-          return 'Please enter a valid email';
-        }
-
-        return null;
-      },
+      validator:(value)=> Validitaion.validateEmail(controller.text),
     );
   }
 }
@@ -129,31 +122,21 @@ class PasswordTextField extends StatelessWidget {
   const PasswordTextField({super.key, required this.controller});
 
   @override
+  void dispose() {
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: Colors.black,
       controller: controller,
       decoration: InputDecoration(
-        labelText: 'Password',
-        hintText: 'Enter Your Password',
+        labelText: StringsManager.passwordWord,
+        hintText: StringsManager.passwordHintText,
       ),
       obscureText: true,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your password';
-        }
-
-        // At least 6 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
-        final passwordRegex = RegExp(
-          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{6,}$',
-        );
-
-        if (!passwordRegex.hasMatch(value)) {
-          return 'Password must be at least 6 characters, include uppercase, lowercase, number, and symbol';
-        }
-
-        return null;
-      },
+      validator:(value)=> Validitaion.validatePassword(controller.text),
     );
   }
 }
@@ -165,6 +148,11 @@ class PasswordConfirmationTextField extends StatelessWidget {
   final TextEditingController confirmController;
   final TextEditingController controller;
 
+  @override
+  void dispose() {
+    controller.dispose();
+    confirmController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,30 +160,12 @@ class PasswordConfirmationTextField extends StatelessWidget {
       cursorColor: Colors.black,
       controller: controller,
       decoration: InputDecoration(
-        labelText: 'Confirm Password',
-        hintText: 'Enter Your Password',
+        labelText: StringsManager.confirmPassword,
+        hintText: StringsManager.passwordHintText,
       ),
       obscureText: true,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your password';
-        }
-
-        // At least 6 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
-        final passwordRegex = RegExp(
-          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{6,}$',
-        );
-
-        if (!passwordRegex.hasMatch(value)) {
-          return 'Password must be at least 6 characters, include uppercase, lowercase, number, and symbol';
-        }
-        if (value != confirmController.text) {
-          return 'Passwords do not match';
-        }
-
-        return null;
-      },
+      validator: (value) => Validitaion.validateConfirmPassword(
+          value: value, originalPasswordController: confirmController),
     );
-
   }
 }

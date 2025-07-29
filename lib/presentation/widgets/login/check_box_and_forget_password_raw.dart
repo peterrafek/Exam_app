@@ -1,3 +1,4 @@
+import 'package:exam_app/core/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,12 +23,12 @@ class RememberMeAndForgetPasswordRow extends StatelessWidget {
           onChanged: onCheckedChanged,
         ),
         SizedBox(width: 4.w),
-        Text('Remember Me'),
+        Text(StringsManager.rememberMe),
         Spacer(),
         InkWell(
           onTap: onForgetPassword,
           child: Text(
-            'Forget password?',
+            StringsManager.forgetPasswordTitle + '?',
             style: TextStyle(decoration: TextDecoration.underline),
           ),
         ),

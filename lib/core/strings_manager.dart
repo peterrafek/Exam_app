@@ -13,5 +13,13 @@ class StringsManager {
   static const String exploreWord = 'Explore';
   static const String resultWord = 'Result';
   static const String profileWord = 'Profile';
+  static const String emailWord = 'Email';
+  static const String emailHintText = 'Enter Your Email';
+  static const String passwordHintText = 'Enter Your Password';
+  static const String confirmPassword = 'Confirm Password';
+  static const String signUpWord = 'Sign Up';
+  static const String rememberMe = 'Remember Me';
+  static const String dontHaveAnAccountStatement = 'Don\'t have an account?';
+
 
 }

@@ -1,9 +1,9 @@
 class LoginRequestEntity {
-  String? email;
-  String? password;
+  String email;
+  String password;
 
   LoginRequestEntity({
-    this.email,
-    this.password,
+    required this.email,
+    required this.password,
   });
 }

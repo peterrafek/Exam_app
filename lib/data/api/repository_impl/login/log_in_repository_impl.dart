@@ -8,13 +8,12 @@ import '../../data_source_contract/login/log_in_data_source.dart';
 
 @Injectable(as: LogInRepository)
 class LogInRepositoryImpl implements LogInRepository {
-  LogInDataSource logInDataSource;
+  LogInRemoteDataSource _logInDataSource;
 
-  @factoryMethod
-  LogInRepositoryImpl(this.logInDataSource);
+  LogInRepositoryImpl(this._logInDataSource);
 
   @override
   Future<Result<LoginResponseEntity>> logIn(LoginRequestEntity request) {
-    return logInDataSource.logIn(request);
+    return _logInDataSource.logIn(request);
   }
 }

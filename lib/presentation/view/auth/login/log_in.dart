@@ -17,7 +17,13 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  LogInCubit logInCubit = getIt.get<LogInCubit>();
+  late final LogInCubit logInCubit;
+
+  @override
+  void initState() {
+    logInCubit = getIt<LogInCubit>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

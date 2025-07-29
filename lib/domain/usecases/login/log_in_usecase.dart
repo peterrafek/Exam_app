@@ -7,12 +7,12 @@ import '../../respository_contract/login/log_in_repository.dart';
 
 @injectable
 class GetLogInUsecase {
-  LogInRepository logInRepository;
+  LogInRepository _logInRepository;
 
-  @factoryMethod
-  GetLogInUsecase(this.logInRepository);
+
+  GetLogInUsecase(this._logInRepository);
 
   Future<Result<LoginResponseEntity>> execute(LoginRequestEntity request) {
-    return logInRepository.logIn(request);
+    return _logInRepository.logIn(request);
   }
 }
