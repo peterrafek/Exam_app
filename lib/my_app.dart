@@ -1,4 +1,5 @@
 
+import 'package:exam_app/presentaion/features/auth/sign_up/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
-        onGenerateRoute: RoutesManager.router,
-        initialRoute: RoutesManager.logIn,
+         home: SignUpScreen(),
+        // initialRoute: RoutesManager.logIn,
         theme: MyTheme.light,
       ),
     );
