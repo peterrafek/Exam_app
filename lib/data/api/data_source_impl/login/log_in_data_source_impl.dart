@@ -3,7 +3,6 @@ import 'package:exam_app/domain/entities/login/requests/login_request.dart';
 import 'package:exam_app/domain/entities/login/response/login_response.dart';
 import 'package:injectable/injectable.dart';
 
-
 import '../../../../core/result.dart';
 import '../../api_client.dart';
 import '../../data_source_contract/login/log_in_data_source.dart';
@@ -27,7 +26,7 @@ class LogInDataSourceImpl implements LogInRemoteDataSource {
       case Success<LoginResponseDto>():
         DioServiceExtension.updateDioWithToken(res.data.token ?? '');
         return Success(data: LoginResponseDto.toEntity(res.data));
-      case Error<LoginResponseDto>():
+      case Error<LoginResponseDto>(:final exception):
         return Error(exception: res);
     }
   }

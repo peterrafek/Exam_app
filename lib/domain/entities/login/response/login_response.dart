@@ -1,12 +1,17 @@
-class LoginResponseEntity {
+import 'package:equatable/equatable.dart';
+
+class LoginResponseEntity extends Equatable {
   final String? message;
   final String? token;
   final UserEntity? user;
 
   LoginResponseEntity({this.message, this.token, this.user});
+
+  @override
+  List<Object?> get props => [message, token, user];
 }
 
-class UserEntity {
+class UserEntity extends Equatable {
   final String? id;
   final String? username;
   final String? firstName;
@@ -28,4 +33,17 @@ class UserEntity {
     this.isVerified,
     this.createdAt,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        username,
+        firstName,
+        lastName,
+        email,
+        phone,
+        role,
+        isVerified,
+        createdAt,
+      ];
 }

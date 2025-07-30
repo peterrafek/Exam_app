@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../domain/entities/login/response/login_response.dart';
@@ -5,7 +6,7 @@ import '../../../../../domain/entities/login/response/login_response.dart';
 part 'login_response_dto.g.dart';
 
 @JsonSerializable()
-class LoginResponseDto {
+class LoginResponseDto extends Equatable {
   final String? message;
   final String? token;
   final UserDto? user;
@@ -21,12 +22,21 @@ class LoginResponseDto {
       LoginResponseEntity(
         message: dto.message,
         token: dto.token,
-        user: dto.user!.toUserEntity(dto.user!),
+        user: dto.user?.toUserEntity(dto.user!),
       );
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        message,
+        token,
+        user,
+      ];
+
 }
 
 @JsonSerializable()
-class UserDto {
+class UserDto  extends Equatable{
   @JsonKey(name: "_id")
   final String? id;
   final String? username;
@@ -66,4 +76,17 @@ class UserDto {
       _$UserDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
+
+  @override
+  List<Object?> get props => [
+    id,
+    username,
+    firstName,
+    lastName,
+    email,
+    phone,
+    role,
+    isVerified,
+    createdAt,
+  ];
 }

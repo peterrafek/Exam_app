@@ -1,11 +1,12 @@
 // lib/data/dto/login_request_dto.dart
+import 'package:equatable/equatable.dart';
 import 'package:exam_app/domain/entities/login/requests/login_request.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'login_request_dto.g.dart';
 
 @JsonSerializable()
-class LoginRequestDto {
+class LoginRequestDto extends Equatable {
   final String? email;
   final String? password;
 
@@ -22,4 +23,10 @@ class LoginRequestDto {
       password: entity.password,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        email,
+        password,
+      ];
 }
