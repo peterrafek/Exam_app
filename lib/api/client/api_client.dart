@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../model/request/sign_up_request.dart';
+import '../model/response/get_all_question_response.dart';
 import '../model/response/sign_up_response.dart';
 
 
@@ -19,4 +20,7 @@ abstract class ApiClient {
   @POST(ApiEndPoints.signUp)
   Future<SignUpResponse> signUp(@Body() SignUpRequest request);
 
+
+  @GET("/v1/questions")
+  Future<GetAllQuestionResponse> getAllQuestion(@Query('exam') String id);
 }
