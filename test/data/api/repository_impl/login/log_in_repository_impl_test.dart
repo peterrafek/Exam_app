@@ -1,0 +1,51 @@
+import 'package:exam_app/core/result.dart';
+import 'package:exam_app/data/api/data_source_contract/login/log_in_data_source.dart';
+import 'package:exam_app/data/api/repository_impl/login/log_in_repository_impl.dart';
+import 'package:exam_app/domain/entities/login/requests/login_request.dart';
+import 'package:exam_app/domain/entities/login/response/login_response.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
+import 'log_in_repository_impl_test.mocks.dart';
+
+@GenerateMocks([LogInRemoteDataSource])
+void main() {
+  test('verify calling login from dataSource ', () async {
+    LogInRemoteDataSource mockLogInDataSource = MockLogInRemoteDataSource();
+    LogInRepositoryImpl logInRepositoryImpl =
+        LogInRepositoryImpl(mockLogInDataSource);
+
+    var loginRequestEntity = LoginRequestEntity(
+      email: 'moaazhassan559@gmail.com',
+      password: 'Moaaz@123',
+    );
+
+    var expectedResponse = LoginResponseEntity(
+      message: 'Login successful',
+      token: 'test_token',
+      user: UserEntity(
+        id: '123',
+        username: 'testuser',
+        firstName: 'Test',
+        lastName: 'User',
+      ),
+    );
+
+    var expectedResult = Success(
+      data: expectedResponse,
+    );
+    provideDummy<Result<LoginResponseEntity>>(expectedResult);
+
+    when(mockLogInDataSource.logIn(loginRequestEntity))
+        .thenAnswer((_) async => expectedResult);
+
+    var res = await logInRepositoryImpl.logIn(loginRequestEntity);
+
+    verify(mockLogInDataSource.logIn(loginRequestEntity)).called(1);
+
+    expect(res, isA<Success<LoginResponseEntity>>());
+    res as Success<LoginResponseEntity>;
+    expect(res.data.message, equals('Login successful'));
+  });
+}
