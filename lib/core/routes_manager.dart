@@ -16,7 +16,7 @@ class RoutesManager {
         );
       case forgetPassword:
         return MaterialPageRoute(
-          builder: (context) => const ForgetPassword(),
+          builder: (context) => const LogIn(),
         );
     }
   }

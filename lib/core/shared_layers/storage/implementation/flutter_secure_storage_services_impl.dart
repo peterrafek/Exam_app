@@ -9,7 +9,7 @@ import '../contract/flutter_secure_storage_service.dart';
 import '../handler/storage_execution_handler.dart';
 
 
-@Singleton(as: SecureStorageService)
+@Injectable(as: SecureStorageService)
 class SecureStorageServiceImp implements SecureStorageService {
   final FlutterSecureStorage storageInstance;
 

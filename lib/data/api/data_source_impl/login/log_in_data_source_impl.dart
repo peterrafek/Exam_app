@@ -12,15 +12,15 @@ import '../../dto/login/responses/login_response_dto.dart';
 
 @Injectable(as: LogInRemoteDataSource)
 class LogInDataSourceImpl implements LogInRemoteDataSource {
-  ApiClient apiClient;
+  ApiClient _apiClient;
 
   @factoryMethod
-  LogInDataSourceImpl({required this.apiClient});
+  LogInDataSourceImpl(this._apiClient);
 
   @override
   Future<Result<LoginResponseEntity>> logIn(LoginRequestEntity request) async {
     var res = await ApiExecutor.executeApi(
-      () => apiClient.login(LoginRequestDto.toDto(request)),
+      () => _apiClient.login(LoginRequestDto.toDto(request)),
     );
     switch (res) {
       case Success<LoginResponseDto>():

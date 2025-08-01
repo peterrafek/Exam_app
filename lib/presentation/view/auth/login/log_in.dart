@@ -42,10 +42,11 @@ class _LogInState extends State<LogIn> {
                 showLoadingDialog(context, color: ColorsManager.blueButton);
               case LoginStateSuccessState():
                 Navigator.pop(context);
-                showAppSnackBar(context, 'Login Successfully', Colors.green);
+                showAppSnackBar(
+                    context, StringsManager.loginSuccessfully, Colors.green);
               case LoginStateErrorState():
                 Navigator.pop(context);
-                showAppSnackBar(context, 'Error', Colors.red);
+                showAppSnackBar(context, StringsManager.error, Colors.red);
             }
           },
           child: BuildLoginForm(logInCubit: logInCubit),

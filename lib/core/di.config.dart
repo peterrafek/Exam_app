@@ -63,10 +63,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i113.UserProvider>(() => _i113.UserProvider());
     gh.factory<_i217.ApiClient>(() => _i217.ApiClient(gh<_i361.Dio>()));
-    gh.singleton<_i383.SecureStorageService<dynamic>>(
+    gh.factory<_i383.SecureStorageService<dynamic>>(
         () => _i651.SecureStorageServiceImp(gh<_i558.FlutterSecureStorage>()));
     gh.factory<_i1034.LogInRemoteDataSource>(
-        () => _i897.LogInDataSourceImpl(apiClient: gh<_i217.ApiClient>()));
+        () => _i897.LogInDataSourceImpl(gh<_i217.ApiClient>()));
     gh.factory<_i424.LogInRepository>(
         () => _i88.LogInRepositoryImpl(gh<_i1034.LogInRemoteDataSource>()));
     gh.factory<_i322.StoreLogInLocalDataSource>(() =>

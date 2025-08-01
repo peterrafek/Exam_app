@@ -20,6 +20,8 @@ class StringsManager {
   static const String signUpWord = 'Sign Up';
   static const String rememberMe = 'Remember Me';
   static const String dontHaveAnAccountStatement = 'Don\'t have an account?';
+  static const String loginSuccessfully = 'Login Successfully';
+  static const String error = 'Error';
 
 
 }

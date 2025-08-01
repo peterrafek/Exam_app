@@ -19,7 +19,7 @@ void main() {
 
   MockApiClient mockApiClient = MockApiClient();
   LogInDataSourceImpl logInDataSourceImpl =
-      LogInDataSourceImpl(apiClient: mockApiClient);
+      LogInDataSourceImpl(mockApiClient);
 
   test('verify calling login from API', () async {
     var loginRequestEntity = LoginRequestEntity(
