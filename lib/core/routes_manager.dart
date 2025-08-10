@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../presentation/view/auth/login/log_in.dart';
+import '../presentaion/features/auth/sign_up/sign_up_screen.dart';
+
+
 
 class RoutesManager {
   static const String signUp = '/signUp';
@@ -10,6 +12,7 @@ class RoutesManager {
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
+
       case logIn:
         return MaterialPageRoute(
           builder: (context) => const LogIn(),
@@ -18,6 +21,14 @@ class RoutesManager {
         return MaterialPageRoute(
           builder: (context) => const LogIn(),
         );
+
+      case signUp:
+        return MaterialPageRoute(
+          builder: (context) =>   SignUpScreen(),
+        );
+
+
+
     }
   }
 }
