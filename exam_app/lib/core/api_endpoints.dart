@@ -5,4 +5,6 @@ class ApiEndpoints {
   static const String forgetPassword = '/v1/auth/forgotPassword';
   static const String verification = '/v1/auth/verifyResetCode';
   static const String resetPassword = '/v1/auth/resetPassword';
+  static const String getAllSubjects = '/v1/subjects';
+  static const String getExams = '/v1/exams';
 }

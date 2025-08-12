@@ -1,3 +1,4 @@
+import 'package:exam_app/core/routes_manager.dart';
 import 'package:exam_app/presentation/widgets/login/build_login_form.dart';
 import 'package:exam_app/presentation/widgets/reusable_widgets.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class _LogInState extends State<LogIn> {
                 Navigator.pop(context);
                 showAppSnackBar(
                     context, StringsManager.loginSuccessfully, Colors.green);
+                Navigator.pushReplacementNamed(context, RoutesManager.home);
               case LoginStateErrorState():
                 Navigator.pop(context);
                 showAppSnackBar(context, StringsManager.error, Colors.red);
