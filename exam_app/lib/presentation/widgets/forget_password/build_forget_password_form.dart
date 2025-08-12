@@ -1,6 +1,6 @@
 import 'package:exam_app/core/strings_manager.dart';
 import 'package:exam_app/presentation/viewmodel/cubits/forget_password/forget_password_cubit.dart';
-import 'package:exam_app/presentation/viewmodel/intents/forget_password_intent.dart';
+import 'package:exam_app/presentation/viewmodel/intents/forget_password/forget_password_intent.dart';
 import 'package:exam_app/presentation/widgets/reusable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +10,9 @@ import '../../../domain/entities/forget_password/requests/forget_password/forget
 
 class BuildForgetPasswordForm extends StatefulWidget {
   ForgetPasswordCubit forgetPasswordCubit;
+  final TextEditingController emailController;
 
-  BuildForgetPasswordForm({super.key, required this.forgetPasswordCubit});
+  BuildForgetPasswordForm({super.key, required this.forgetPasswordCubit, required this.emailController});
 
   @override
   State<BuildForgetPasswordForm> createState() => _BuildLoginFormState();
@@ -19,12 +20,10 @@ class BuildForgetPasswordForm extends StatefulWidget {
 
 class _BuildLoginFormState extends State<BuildForgetPasswordForm> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  bool isLoading = false;
 
   @override
   void dispose() {
-    emailController.dispose();
+   widget.emailController.dispose();
     super.dispose();
   }
 
@@ -49,7 +48,7 @@ class _BuildLoginFormState extends State<BuildForgetPasswordForm> {
                 style: AppStyle.forgetPasswordSubtitle,
               ),
               SizedBox(height: 30.h),
-              EmailTextField(controller: emailController),
+              EmailTextField(controller: widget.emailController),
               SizedBox(height: 50.h),
               BlueButton(
                   onPressed: () {
@@ -57,7 +56,7 @@ class _BuildLoginFormState extends State<BuildForgetPasswordForm> {
                       widget.forgetPasswordCubit.doIntent(
                         OnConfirmEmailForgetPasswordClickIntent(
                           request: ForgetPasswordRequestEntity(
-                              email: emailController.text),
+                              email: widget.emailController.text),
                         ),
                       );
                     }

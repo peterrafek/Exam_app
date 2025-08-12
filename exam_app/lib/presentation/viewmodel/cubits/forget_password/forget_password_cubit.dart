@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../domain/entities/forget_password/requests/forget_password/forget_password_request.dart';
 import '../../../../domain/entities/forget_password/response/forget_password/forget_password_response.dart';
 import '../../../../domain/usecases/forget_password/forget_password_usecase.dart';
-import '../../intents/forget_password_intent.dart';
+import '../../intents/forget_password/forget_password_intent.dart';
 import '../../states/forget_password/forget_password_state.dart';
 
 @injectable

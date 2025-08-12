@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../domain/entities/login/requests/login/login_request.dart';
 import '../../viewmodel/cubits/login/log_in_cubit.dart';
-import '../../viewmodel/intents/log_in_intent.dart';
+import '../../viewmodel/intents/login/log_in_intent.dart';
 import 'check_box_and_forget_password_raw.dart';
 
 class BuildLoginForm extends StatefulWidget {
