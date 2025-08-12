@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/result.dart';
 import '../../../../domain/usecases/login/log_in_usecase.dart';
-import '../../intents/log_in_intent.dart';
+import '../../intents/login/log_in_intent.dart';
 import '../../states/login/login_state.dart';
 
 @injectable

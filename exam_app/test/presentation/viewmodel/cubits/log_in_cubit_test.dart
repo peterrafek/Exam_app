@@ -4,7 +4,7 @@ import 'package:exam_app/domain/entities/login/requests/login/login_request.dart
 import 'package:exam_app/domain/entities/login/response/login/login_response.dart';
 import 'package:exam_app/domain/usecases/login/log_in_usecase.dart';
 import 'package:exam_app/presentation/viewmodel/cubits/login/log_in_cubit.dart';
-import 'package:exam_app/presentation/viewmodel/intents/log_in_intent.dart';
+import 'package:exam_app/presentation/viewmodel/intents/login/log_in_intent.dart';
 import 'package:exam_app/presentation/viewmodel/states/login/login_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

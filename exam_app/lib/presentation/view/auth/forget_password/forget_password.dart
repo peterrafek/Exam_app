@@ -7,6 +7,7 @@ import 'package:exam_app/presentation/widgets/forget_password/build_forget_passw
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/routes_manager.dart';
 import '../../../widgets/reusable_widgets.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -17,7 +18,6 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   late final ForgetPasswordCubit forgetPasswordCubit;
 
@@ -46,16 +46,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               Navigator.pop(context);
               showAppSnackBar(
                   context, StringsManager.otpSentSuccessfully, Colors.green);
-            // Navigator.pushReplacementNamed(
-            //     context, RoutesManager.emailVerification,
-            //     arguments: emailController.text);
+              Navigator.pushReplacementNamed(
+                  context, RoutesManager.emailVerification,
+                  arguments: emailController.text);
             case ForgetPasswordErrorState():
               Navigator.pop(context);
               showAppSnackBar(context, StringsManager.error, Colors.red);
           }
         },
-        child:
-            BuildForgetPasswordForm(forgetPasswordCubit: forgetPasswordCubit),
+        child: BuildForgetPasswordForm(
+            forgetPasswordCubit: forgetPasswordCubit,
+            emailController: emailController),
       ),
     );
   }

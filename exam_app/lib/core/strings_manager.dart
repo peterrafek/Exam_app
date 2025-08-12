@@ -29,12 +29,16 @@ abstract class StringsManager {
   static const String enterYourEmail = "Enter Your Email";
   static const String thisEmailIsNitValid = "this Email is not valid";
   static const String emailFormatIsWrong = 'Email format is wrong';
-  static const String emailRegsExp = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  static const String forgetPasswordSubTitle = 'Please enter your email associated to your account';
+  static const String emailRegsExp =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  static const String forgetPasswordSubTitle =
+      'Please enter your email associated to your account';
   static const String emailVerificationTitle = 'Email verification';
-  static const String emailVerificationSubTitle = 'Please enter your code that send to your email address';
+  static const String emailVerificationSubTitle =
+      'Please enter your code that send to your email address';
   static const String resetPasswordTitle = 'Reset password';
-  static const String resetPasswordSubTitle = 'Password must not be empty and must contain 6 characters with upper case letter and one number at least ';
+  static const String resetPasswordSubTitle =
+      'Password must not be empty and must contain 6 characters with upper case letter and one number at least ';
   static const String exploreWord = 'Explore';
   static const String resultWord = 'Result';
   static const String profileWord = 'Profile';
@@ -46,4 +50,6 @@ abstract class StringsManager {
   static const String loginSuccessfully = 'Login Successfully';
   static const String continueWord = 'Continue';
   static const String otpSentSuccessfully = "OTP sent successfully.";
+  static const String verificationSuccess = "Verification Successedd";
+  static const String enter6DigitCode = "Please enter the 6-digit code.";
 }
