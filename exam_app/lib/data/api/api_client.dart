@@ -47,4 +47,7 @@ abstract class ApiClient {
 
   @GET(ApiEndpoints.getExams)
   Future<ExamsResponseDto> getExam(@Query('subject') String id);
+
+  @GET(ApiEndpoints.getAllQuestions)
+  Future<GetAllQuestionResponse> getAllQuestion(@Query('exam') String id);
 }
