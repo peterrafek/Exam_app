@@ -7,4 +7,5 @@ class ApiEndpoints {
   static const String resetPassword = '/v1/auth/resetPassword';
   static const String getAllSubjects = '/v1/subjects';
   static const String getExams = '/v1/exams';
+  static const String getAllQuestions = "/v1/questions";
 }
